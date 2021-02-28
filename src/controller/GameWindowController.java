@@ -34,11 +34,7 @@ public class GameWindowController {
      * Set lanes in the yard
      */
     private static int sunScore = 50;
-    public static final int LANE1 = 50;
-    public static final int LANE2 = 150;
-    public static final int LANE3 = 250;
-    public static final int LANE4 = 350;
-    public static final int LANE5 = 450;
+    public static final int[] LANES = {50, 150, 250, 350, 450};
     public static Timeline spawnZombieTimeline;
     private static Label sunScoreLabelControl;
     public static List allZombies;
@@ -46,7 +42,7 @@ public class GameWindowController {
     public static ArrayList<Timeline> animationTimelines;
     public int spawnedZombies = 0;
 
-    public void initialize() throws Exception {
+    public void initialize(){
 
         String waveFile = "src/resource/sound/zombies_coming.wav";
         Media wave = new Media(new File(waveFile).toURI().toString());
@@ -128,18 +124,8 @@ public class GameWindowController {
 
     public void normalZombieGenerator(Random rand, double t) {
         Timeline spawnZombie = new Timeline(new KeyFrame(Duration.seconds(t), event -> {
-            int lane;
             int laneNumber = rand.nextInt(5);
-            if (laneNumber == 0)
-                lane = LANE1;
-            else if (laneNumber == 1)
-                lane = LANE2;
-            else if (laneNumber == 2)
-                lane = LANE3;
-            else if (laneNumber == 3)
-                lane = LANE4;
-            else
-                lane = LANE5;
+            int lane = LANES[laneNumber];
 
             spawnNormalZombie(GamePlayRoot, lane, laneNumber);
         }));
@@ -160,18 +146,8 @@ public class GameWindowController {
 
     public void coneHeadZombieGenerator(Random rand, double t) {
         Timeline spawnZombie = new Timeline(new KeyFrame(Duration.seconds(t), event -> {
-            int lane;
             int laneNumber = rand.nextInt(5);
-            if (laneNumber == 0)
-                lane = LANE1;
-            else if (laneNumber == 1)
-                lane = LANE2;
-            else if (laneNumber == 2)
-                lane = LANE3;
-            else if (laneNumber == 3)
-                lane = LANE4;
-            else
-                lane = LANE5;
+            int lane = LANES[laneNumber];
 
             spawnConeHeadZombie(GamePlayRoot, lane, laneNumber);
         }));
@@ -184,18 +160,8 @@ public class GameWindowController {
 
     public void bucketZombieGenerator(Random rand, double t) {
         Timeline spawnZombie = new Timeline(new KeyFrame(Duration.seconds(t), event -> {
-            int lane;
             int laneNumber = rand.nextInt(5);
-            if (laneNumber == 0)
-                lane = LANE1;
-            else if (laneNumber == 1)
-                lane = LANE2;
-            else if (laneNumber == 2)
-                lane = LANE3;
-            else if (laneNumber == 3)
-                lane = LANE4;
-            else
-                lane = LANE5;
+            int lane = LANES[laneNumber];
 
             spawnBucketZombie(GamePlayRoot, lane, laneNumber);
         }));
@@ -211,7 +177,7 @@ public class GameWindowController {
 
     public static void spawnConeHeadZombie(Pane pane, int lane, int laneNumber)
     {
-        ConehHeadZombie zombie = new ConehHeadZombie(1024, lane, laneNumber);
+        ConeHeadZombie zombie = new ConeHeadZombie(1024, lane, laneNumber);
         zombie.drawImage(pane);
         GameWindowController.allZombies.add(zombie);
         zombie.forward();
@@ -219,7 +185,7 @@ public class GameWindowController {
 
     public static void spawnBucketZombie(Pane pane, int lane, int laneNumber)
     {
-        BucketZombie zombie = new BucketZombie(1024, lane, laneNumber);
+        BucketHeadZombie zombie = new BucketHeadZombie(1024, lane, laneNumber);
         zombie.drawImage(pane);
         GameWindowController.allZombies.add(zombie);
         zombie.forward();

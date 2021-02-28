@@ -37,7 +37,7 @@ public class PeaBullet extends GameElements {
 
     public void collideZombie(){
         if(getX() >= target.getX()) {
-            target.setHp(target.getHp() - 1);
+            target.setHealthPoint(target.getHealthPoint() - 1);
             soar.stop();
             img.setVisible(false);
             img.setDisable(true);

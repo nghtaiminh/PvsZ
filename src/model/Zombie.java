@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.Iterator;
 
 public abstract class Zombie extends GameElements {
-    public int hp;
+    public int healthPoint;
     public int damage;
     public int lane;
     public int x, y;
@@ -21,9 +21,9 @@ public abstract class Zombie extends GameElements {
     public ImageView image;
     public Timeline eat;
 
-    public Zombie(int x, int y, String imagePath, int health, int damage, int lane, int width, int height) {
+    public Zombie(int x, int y, String imagePath, int healthPoint, int damage, int lane, int width, int height) {
         super(x, y, imagePath, width, height);
-        this.hp = health;
+        this.healthPoint = healthPoint;
         this.damage = damage;
         this.lane = lane;
 
@@ -32,7 +32,7 @@ public abstract class Zombie extends GameElements {
 
     public void forward() {
         move = new Timeline(new KeyFrame(Duration.millis(70), e -> {
-            checkHp();
+            checkHealthPoint();
             zombieWalk();
             checkReachedHouse();
         }));
@@ -64,7 +64,7 @@ public abstract class Zombie extends GameElements {
     public void eatPlant(Plant plant){
         if(plant != null) {
             stop();
-            if (plant.getHp() > 0 && getHp() > 0) {
+            if (plant.getHp() > 0 && getHealthPoint() > 0) {
                 eat = new Timeline(new KeyFrame(Duration.millis(100), actionEvent -> {
                     if(!GameWindowController.allPlants.contains(plant)){
                         eat.stop();
@@ -114,21 +114,21 @@ public abstract class Zombie extends GameElements {
 
 
 
-    public int getHp() {
-        return hp;
+    public int getHealthPoint() {
+        return healthPoint;
     }
 
     public int getLane() {
         return lane;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
-        checkHp();
+    public void setHealthPoint(int healthPoint) {
+        this.healthPoint = healthPoint;
+        checkHealthPoint();
     }
 
-    public void checkHp(){
-        if(hp <= 0){
+    public void checkHealthPoint(){
+        if(healthPoint <= 0){
             this.img.setVisible(false);
             this.img.setDisable(true);
             move.stop();

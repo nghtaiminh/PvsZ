@@ -9,20 +9,20 @@ import javafx.util.Duration;
 public class Sun extends GameElements{
     private int x;
     private int y;
-    private final int timeouttime;
+    private final int timeOut;
 
     public Sun(int x, int y, boolean fallingSun)
     {
         super(x, y, "resource/image/sun.gif", 50, 50);
 
-        if(fallingSun) timeouttime=14000;
-        else timeouttime=5000;
+        if(fallingSun) timeOut =14000;
+        else timeOut =5000;
         disappearAfterTime();
     }
     public void disappearAfterTime(){
         Thread t = new Thread(() -> {
             try {
-                Thread.sleep(timeouttime);
+                Thread.sleep(timeOut);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,8 +44,8 @@ public class Sun extends GameElements{
     }
 
     public void moveSun() {
-        if(getY()<=550) {
-            setY(getY()+1);
+        if(getY() <= 550) {
+            setY(getY() + 1);
         }
     }
 

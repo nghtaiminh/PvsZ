@@ -13,11 +13,11 @@ public abstract class GameElements{
     protected int height;
 
     public GameElements(int x, int y, String path, int width, int height){
-        this.x=x;
-        this.y=y;
-        this.path=path;
-        this.width=width;
-        this.height=height;
+        this.x = x;
+        this.y = y;
+        this.path = path;
+        this.width = width;
+        this.height = height;
     }
 
     public void drawImage(Pane pane){
@@ -30,7 +30,7 @@ public abstract class GameElements{
     }
 
     public int getX(){
-        return this.x;
+        return x;
     }
 
     public void setX(int x) {
